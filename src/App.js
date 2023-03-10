@@ -1,5 +1,5 @@
-import axios from "axios";
-import React, { useRef, useState, useEffect, useCallback, useMemo } from "react";
+import React, { useRef, useState} from "react";
+import '../src/styles.css'
 import Moveable from "react-moveable";
 
 const App = () => {
@@ -123,8 +123,8 @@ const App = () => {
           ))}
       </div>
       <div style={{display: 'flex', width: '40%', justifyContent: 'space-between'}}>
-      <button className="btn-add" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', backgroundColor: 'black', color: 'white', borderRadius: '10px', transform: 'scale(1.5)', cursor: 'pointer', padding: '9px', fontFamily: 'monospace'}} onClick={all}>Add Moveable</button>
-      <button className="btn-add" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', borderRadius: '10px', transform: 'scale(1.5)', cursor: 'pointer', padding: '9px', fontFamily: 'monospace'}} onClick={() => del(objDel)} disabled={disabled}>Eliminar Objeto</button>
+      <button className="btn-dark" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', backgroundColor: 'black', color: 'white', borderRadius: '10px', cursor: 'pointer', padding: '9px', fontFamily: 'monospace'}} onClick={all}>Add Moveable</button>
+      <button className="btn-ligth" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', borderRadius: '10px', padding: '9px', fontFamily: 'monospace', color: 'black'}} onClick={() => del(objDel)} disabled={disabled}>Eliminar Objeto</button>
       </div>
     </main>
   );

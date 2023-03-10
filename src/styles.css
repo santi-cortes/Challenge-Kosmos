@@ -18,10 +18,28 @@
   align-items: center;
 }
 
-.dragg {
-  transition: all .2s ease;
+button {
+  transform: scale(1.5);
+  transition: transform .5s ease;
+}
+
+button:hover {
+  transform: scale(1.6);
+  transition: transform .5s ease;
+}
+
+.btn-dark:hover {
+  background-color: rgba(0, 0, 0, 0.925) !important;
+}
+
+.btn-ligth:hover {
+  background-color: rgba(0, 0, 0, 0.171) !important;
 }
 
 button:disabled {
-  background-color: gray;
+  background-color: rgba(128, 128, 128, 0.445) !important;
+}
+
+button:enabled {
+  cursor: pointer !important;
 }
