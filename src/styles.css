@@ -1,5 +1,5 @@
 .title {
-  font-family: sans-serif;
+  font-family: monospace;
   text-align: center;
 }
 
@@ -12,19 +12,16 @@
   gap: 1em;
 }
 
-.button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  font-size: 8px;
-}
-
 #parent {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dragg {
+  transition: all .2s ease;
+}
+
+button:disabled {
+  background-color: gray;
 }

@@ -24,20 +24,20 @@ const App = () => {
         height: 100,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
         updateEnd: true,
-        background: images
+        background: images,
       },
     ]);
   };
-  
-  
-  let api = `https://jsonplaceholder.typicode.com/photos`
 
+  console.log();
+
+  
   const img = async function () {
+    let api = `https://jsonplaceholder.typicode.com/photos`
     let data = await fetch(api).then((res) => res.json());
     console.log(data[0].url); 
     setImages(data[Math.floor(Math.random() * data.length)].url);
   }
-  img()
   
 
     
@@ -74,6 +74,29 @@ const App = () => {
     }
   };
 
+  function all() {
+    addMoveable();
+    img();
+  }
+
+  const [disabled, setDisabled] = useState(true);
+  const [objDel, setObjDel] = useState();
+  
+  
+
+  function obj(idO) {
+    setObjDel(idO);
+    setDisabled(false);
+  }
+
+  function del(idO) {
+    console.log(idO)
+    const deleteMoveable = moveableComponents.filter((e) => e.id !== idO);
+    console.log(deleteMoveable);
+    setMoveableComponents(deleteMoveable);
+    setDisabled(true);
+  }
+
   return (
     <main style={{margin: '0', padding: '0', height : "100%", width: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
       <h1 style={{fontFamily: 'monospace', fontSize: '35px'}}>Example of the Movable Library</h1>
@@ -93,11 +116,16 @@ const App = () => {
             handleResizeStart={handleResizeStart}
             setSelected={setSelected}
             isSelected={selected === item.id}
+            moveableComponents={moveableComponents}
+            obj={obj}
           >
           </Component>
           ))}
       </div>
-      <button style={{fontFamily: 'monospace', width: '130px', marginTop: '20px', backgroundColor: 'black', color: 'white', borderRadius: '10px', transform: 'scale(1.5)', cursor: 'pointer'}} onClick={addMoveable}>Add Moveable1</button>
+      <div style={{display: 'flex', width: '40%', justifyContent: 'space-between'}}>
+      <button className="btn-add" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', backgroundColor: 'black', color: 'white', borderRadius: '10px', transform: 'scale(1.5)', cursor: 'pointer', padding: '9px', fontFamily: 'monospace'}} onClick={all}>Add Moveable</button>
+      <button className="btn-add" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', borderRadius: '10px', transform: 'scale(1.5)', cursor: 'pointer', padding: '9px', fontFamily: 'monospace'}} onClick={() => del(objDel)} disabled={disabled}>Eliminar Objeto</button>
+      </div>
     </main>
   );
 };
@@ -116,6 +144,8 @@ const Component = ({
   id,
   setSelected,
   isSelected = false,
+  moveableComponents,
+  obj,
   updateEnd,
 }) => {
   const ref = useRef();
@@ -208,23 +238,34 @@ const Component = ({
     );
   };
 
+  const deleteObj = () => {
+    console.log(moveableComponents);
+    obj(id);
+  }
+
   return (
     <>
       <div
         ref={ref}
-        className="draggable"
+        className="dragg"
         id={"component-" + id}
         style={{
-          position: "relative",
+          display: 'flex',
+          marginTop: '10.4vh',
+          marginLeft: '10vw',
+          position: "absolute",
           top: top,
           left: left,
           width: width,
           height: height,
           background: color,
           cursor: 'pointer',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
           backgroundImage: `url("${background}")`,
         }}
-        onClick={() => setSelected(id)}
+        onClick={() => {setSelected(id); deleteObj()}}
       />
 
 
