@@ -75,7 +75,8 @@ const App = () => {
   };
 
   return (
-    <main style={{ height : "100vh", width: "100vw", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+    <main style={{margin: '0', padding: '0', height : "100%", width: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+      <h1 style={{fontFamily: 'monospace', fontSize: '35px'}}>Example of the Movable Library</h1>
       <div
         id="parent"
         style={{
@@ -96,7 +97,7 @@ const App = () => {
           </Component>
           ))}
       </div>
-      <button style={{width: '130px', marginTop: '20px'}} onClick={addMoveable}>Add Moveable1</button>
+      <button style={{fontFamily: 'monospace', width: '130px', marginTop: '20px', backgroundColor: 'black', color: 'white', borderRadius: '10px', transform: 'scale(1.5)', cursor: 'pointer'}} onClick={addMoveable}>Add Moveable1</button>
     </main>
   );
 };
