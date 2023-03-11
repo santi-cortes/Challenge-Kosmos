@@ -29,13 +29,11 @@ const App = () => {
     ]);
   };
 
-  console.log();
 
   
   const img = async function () {
     let api = `https://jsonplaceholder.typicode.com/photos`
     let data = await fetch(api).then((res) => res.json());
-    console.log(data[0].url); 
     setImages(data[Math.floor(Math.random() * data.length)].url);
   }
   
@@ -74,9 +72,9 @@ const App = () => {
     }
   };
 
-  function all() {
-    addMoveable();
-    img();
+  const all = async () => {
+    await img();
+    await addMoveable();
   }
 
   const [disabled, setDisabled] = useState(true);
@@ -90,16 +88,15 @@ const App = () => {
   }
 
   function del(idO) {
-    console.log(idO)
     const deleteMoveable = moveableComponents.filter((e) => e.id !== idO);
-    console.log(deleteMoveable);
     setMoveableComponents(deleteMoveable);
     setDisabled(true);
   }
 
   return (
     <main style={{margin: '0', padding: '0', height : "100%", width: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-      <h1 style={{fontFamily: 'monospace', fontSize: '35px'}}>Example of the Movable Library</h1>
+      <h1 style={{fontFamily: 'monospace', fontSize: '28px', margin: '0px 0px 15px 0px'}}>Example of the Movable Library</h1>
+      <p id="paragraph">Hello, you are seeing an example of the use of the <span style={{fontSize: 'bolder !important'}}>Movable</span> library, you can create a movable and stretch component which will have a Random image, you can delete an element touching it and giving in the eliminate button</p>
       <div
         id="parent"
         style={{
@@ -223,7 +220,6 @@ const Component = ({
 
     const absoluteTop = top;
     const absoluteLeft = left;
-    console.log(parentBounds?.height);
     updateMoveable(
       id,
       {
@@ -239,7 +235,6 @@ const Component = ({
   };
 
   const deleteObj = () => {
-    console.log(moveableComponents);
     obj(id);
   }
 
@@ -251,7 +246,7 @@ const Component = ({
         id={"component-" + id}
         style={{
           display: 'flex',
-          marginTop: '10.4vh',
+          marginTop: '11.6vh',
           marginLeft: '10vw',
           position: "absolute",
           top: top,
