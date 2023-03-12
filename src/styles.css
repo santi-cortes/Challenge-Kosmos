@@ -170,10 +170,6 @@ button:enabled {
   border: none !important;
 }
 
-.frame {
-  transition: all .0.5s ease;
-}
-
 @media (max-width: 620px) {
   .buttons {
     flex-direction: column;

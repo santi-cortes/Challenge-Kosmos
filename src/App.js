@@ -260,7 +260,7 @@ const Component = ({
     <>
       <div
         ref={ref}
-        className="dragg"
+        className="dragg frame"
         id={"component-" + id}
         style={{
           position: 'relative',
@@ -280,7 +280,6 @@ const Component = ({
 
 
       <Moveable
-        className="frame"
         target={isSelected && ref.current}
         resizable
         draggable
