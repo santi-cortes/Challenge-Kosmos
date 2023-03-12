@@ -12,12 +12,13 @@
   --text-primary: #ffffff;
   --text-secondary: #a7a4a4;
   --shadow: 7px 15px 13px -4px #ffffff1b;
-  --container: #7a7a7a;
+  --container: #adadad;
 }
 
 body {
   background-color: var(--background);
   color: var(--text-primary);
+  transition: background-color .5s ease;
 }
 
 .title {
@@ -133,6 +134,7 @@ h1 {
   justify-content: center;
   align-items: center;
   background-color: var(--container);
+  transition: background-color .5s ease;
 }
 
 button {
@@ -153,11 +155,15 @@ button:hover {
 .btn-dark {
   background-color: var(--text-primary);
   color: var(--background);
+  transition: background-color 1s ease;
+
 }
 
 .btn-light {
   background-color: var(--background);
   color: var(--background);
+  transition: background-color 1s ease;
+
 }
 
 button:disabled {

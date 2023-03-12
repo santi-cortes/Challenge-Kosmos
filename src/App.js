@@ -11,9 +11,6 @@ const App = () => {
     // Create a new moveable component and add it to the array
     const COLORS = ["red", "blue", "yellow", "green", "purple"];
     
-    // Get background images
-    
-    
   setMoveableComponents([
     ...moveableComponents,
       {
@@ -29,6 +26,7 @@ const App = () => {
     ]);
   };
 
+  // Change the theme to dark or light
   const [theme, setTheme] = useState('dark');
 
   function handleChange (e) {
@@ -36,8 +34,7 @@ const App = () => {
     setTheme(e.target.checked ? 'light' : 'dark')
   }
 
-  
-  
+  // Get background images
   const img = async function () {
     let api = `https://jsonplaceholder.typicode.com/photos`
     let data = await fetch(api).then((res) => res.json());
@@ -45,10 +42,8 @@ const App = () => {
   }
   
 
-    
+  // Update Component Moveable
   const updateMoveable = (id, newComponent, updateEnd = false) => {
-
-
     const updatedMoveables = moveableComponents.map((moveable, i) => {
       if (moveable.id == id) {
         return { id, ...newComponent, updateEnd };
@@ -76,7 +71,8 @@ const App = () => {
       // Set up the onResize event handler to update the left value based on the change in width
     }
   };
-
+  
+  // Function creates a component with random image
   const all = async () => {
     await img();
     await addMoveable();
@@ -84,7 +80,6 @@ const App = () => {
 
   const [disabled, setDisabled] = useState(true);
   const [objDel, setObjDel] = useState();
-  
   
 
   function obj(idO) {
@@ -220,7 +215,7 @@ const Component = ({
       left: left + translateX < 0 ? 0 : left + translateX,
     });
   };
-
+  // Update the final size of the component
   const onResizeEnd = async (e) => {
     let newWidth = e.lastEvent?.width;
     let newHeight = e.lastEvent?.height;
