@@ -1,4 +1,4 @@
-import React, { useRef, useState} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import '../src/styles.css'
 import Moveable from "react-moveable";
 
@@ -29,7 +29,14 @@ const App = () => {
     ]);
   };
 
+  const [theme, setTheme] = useState('dark');
 
+  function handleChange (e) {
+    let main = document.body.setAttribute('data-theme', theme);
+    setTheme(e.target.checked ? 'light' : 'dark')
+  }
+
+  
   
   const img = async function () {
     let api = `https://jsonplaceholder.typicode.com/photos`
@@ -52,7 +59,6 @@ const App = () => {
   };
 
   const handleResizeStart = (index, e) => {
-    console.log("e", e.direction);
     // Check if the resize is coming from the left handle
     const [handlePosX, handlePosY] = e.direction;
     // 0 => center
@@ -63,7 +69,6 @@ const App = () => {
     // -1, 0
     // -1, 1
     if (handlePosX === -1) {
-      console.log("width", moveableComponents, e);
       // Save the initial left and width values of the moveable component
       const initialLeft = e.left;
       const initialWidth = e.width;
@@ -94,14 +99,27 @@ const App = () => {
   }
 
   return (
-    <main style={{margin: '0', padding: '0', height : "100%", width: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-      <h1 style={{fontFamily: 'monospace', fontSize: '28px', margin: '0px 0px 15px 0px'}}>Example of the Movable Library</h1>
-      <p id="paragraph">Hello, you are seeing an example of the use of the <span style={{fontSize: 'bolder !important'}}>Movable</span> library, you can create a movable and stretch component which will have a Random image, you can delete an element touching it and giving in the eliminate button</p>
+    <main className="main" style={{margin: '0', padding: '0', height : "98vh", width: "96vw", display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column' }}>
+      <div className="container-switch">
+      <span className="tag-contain">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 256"><path fill="currentColor" d="M124 40v-8a4 4 0 0 1 8 0v8a4 4 0 0 1-8 0Zm64 88a60 60 0 1 1-60-60a60.07 60.07 0 0 1 60 60Zm-8 0a52 52 0 1 0-52 52a52.06 52.06 0 0 0 52-52ZM61.17 66.83a4 4 0 0 0 5.66-5.66l-8-8a4 4 0 0 0-5.66 5.66Zm0 122.34l-8 8a4 4 0 0 0 5.66 5.66l8-8a4 4 0 0 0-5.66-5.66Zm136-136l-8 8a4 4 0 0 0 5.66 5.66l8-8a4 4 0 1 0-5.66-5.66Zm-2.34 136a4 4 0 0 0-5.66 5.66l8 8a4 4 0 0 0 5.66-5.66ZM40 124h-8a4 4 0 0 0 0 8h8a4 4 0 0 0 0-8Zm88 88a4 4 0 0 0-4 4v8a4 4 0 0 0 8 0v-8a4 4 0 0 0-4-4Zm96-88h-8a4 4 0 0 0 0 8h8a4 4 0 0 0 0-8Z"/></svg></span>
+        <label className="switch" >
+          <input type="checkbox" onChange={handleChange}/>
+          <span className="slider"></span>
+        </label>
+
+        <span className="tag-contain">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 1 1 2 12A10 10 0 0 1 12 2Z"/></svg></span>
+      </div>
+      <h1 className="title">Example of the Movable Library</h1>
+      <p id="paragraph">Hello, you are seeing an example of the use of the <span style={{fontWeight: 'bolder !important'}}>Movable</span> library, you can create a movable and stretch component which will have a Random image, you can delete an element touching it and giving in the eliminate button</p>
       <div
         id="parent"
         style={{
-          background: "black",
-          height: "80vh",
+          height: "75vh",
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
           width: "80vw",
         }}
       >
@@ -119,9 +137,9 @@ const App = () => {
           </Component>
           ))}
       </div>
-      <div style={{display: 'flex', width: '40%', justifyContent: 'space-between'}}>
-      <button className="btn-dark" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', backgroundColor: 'black', color: 'white', borderRadius: '10px', cursor: 'pointer', padding: '9px', fontFamily: 'monospace'}} onClick={all}>Add Moveable</button>
-      <button className="btn-ligth" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', borderRadius: '10px', padding: '9px', fontFamily: 'monospace', color: 'black'}} onClick={() => del(objDel)} disabled={disabled}>Eliminar Objeto</button>
+      <div className="buttons" style={{display: 'flex', width: '40vw', minWidth: '450px', justifyContent: 'space-between', marginTop: '-15px'}}>
+        <button className="btn-dark" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', borderRadius: '10px', cursor: 'pointer', padding: '9px', fontFamily: 'monospace'}} onClick={all}>Add Moveable</button>
+        <button className="btn-ligth" style={{ width: '150px', fontWeight: 'bold', marginTop: '20px', borderRadius: '10px', padding: '9px', fontFamily: 'monospace'}} onClick={() => del(objDel)} disabled={disabled}>Delete Moveable</button>
       </div>
     </main>
   );
@@ -245,10 +263,7 @@ const Component = ({
         className="dragg"
         id={"component-" + id}
         style={{
-          display: 'flex',
-          marginTop: '11.6vh',
-          marginLeft: '10vw',
-          position: "absolute",
+          position: 'relative',
           top: top,
           left: left,
           width: width,
@@ -265,6 +280,7 @@ const Component = ({
 
 
       <Moveable
+        className="frame"
         target={isSelected && ref.current}
         resizable
         draggable
